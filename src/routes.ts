@@ -1,11 +1,6 @@
 import express from 'express';
+import actions from './actions';
 
 export default async (server: express.Express) => {
-  server.get('/', async (req, res) => {
-    return res.status(200).json({
-      data: {
-        message: 'Hello World!',
-      },
-    });
-  });
+  server.get('/enroll_token', actions.enroll);
 };
