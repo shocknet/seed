@@ -1,16 +1,19 @@
 import { ConnectionOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
+import multer from 'multer';
 
 dotenv.config();
 
 export type Config = {
   port: number;
   db: ConnectionOptions;
+  storage: multer.StorageEngine;
 };
 
 export default {
   port: process.env.PORT || 3000,
   db: ParseDatabase(),
+  storage: CheckStorage()
 } as Config;
 
 // ParseDatabase generates a database connection using environment variables,
@@ -35,5 +38,21 @@ function ParseDatabase() {
         entities: [__dirname + '/models/*.ts'],
         synchronize: true,
       } as ConnectionOptions;
+  }
+}
+
+// CheckStorage checks the given storage type, to decide which
+// storage engine to use for multer.
+function CheckStorage() {
+  switch (process.env.STORAGE_TYPE) {
+    case 'cdn':
+    // TODO: Implement CDN support
+    default:
+      const path = process.env.STORAGE_PATH || '/tmp/seed-uploads';
+      return multer.diskStorage({
+        destination: function(req, file, cb) {
+          cb(null, path);
+        },
+      });
   }
 }
