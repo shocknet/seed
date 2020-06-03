@@ -1,6 +1,8 @@
 import { ConnectionOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 import multer from 'multer';
+import { nanoid } from 'nanoid';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -13,7 +15,7 @@ export type Config = {
 export default {
   port: process.env.PORT || 3000,
   db: ParseDatabase(),
-  storage: CheckStorage()
+  storage: CheckStorage(),
 } as Config;
 
 // ParseDatabase generates a database connection using environment variables,
@@ -48,9 +50,22 @@ function CheckStorage() {
     case 'cdn':
     // TODO: Implement CDN support
     default:
-      const path = process.env.STORAGE_PATH || '/tmp/seed-uploads';
       return multer.diskStorage({
         destination: function(req, file, cb) {
+          // Generate separate directories on storage path for each request
+          const path =
+            (process.env.STORAGE_PATH || `/tmp/seed-uploads`) +
+            `/${req.token.token}`;
+
+          // Create the directory if it doesn't exist
+          fs.exists(path, exist => {
+            if (!exist) {
+              return fs.mkdir(path, error => {
+                cb(null, path);
+              });
+            }
+          });
+
           cb(null, path);
         },
       });
