@@ -1,5 +1,6 @@
 import express from 'express';
 import { createConnection, Connection } from 'typeorm';
+import bodyParser from 'body-parser';
 
 import registerRoutes from './routes';
 import config from './config';
@@ -18,6 +19,8 @@ export const bootstrap = async () => {
   app.db = await createConnection(config.db);
 
   await app.db.runMigrations();
+
+  app.server.use(bodyParser.json());
 
   registerRoutes(app.server);
 

@@ -1,12 +1,21 @@
 import { Request, Response } from 'express';
-
-const UserAgentRegex = /(ShockWallet)\sv(([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?)/;
+import { app } from '../../server';
+import { Token } from '../../models/Token';
 
 export default async (req: Request, res: Response) => {
-  let matches = await req.headers['user-agent'].match(UserAgentRegex);
-  // TODO: Compare the version to the GitHub tags
-  if (matches === null || matches[1] !== 'ShockWallet') {
+  let TokenRepository = app.db.getRepository(Token);
+
+  if (req.body.seed_token !== process.env.ENROLL_TOKEN) {
     return res.status(403).end();
   }
+
+  await TokenRepository.save(
+    TokenRepository.create({
+      token: req.body.wallet_token,
+    }),
+  ).catch(() => {
+    return res.status(403).end();
+  });
+
   return res.status(200).end();
 };

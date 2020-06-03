@@ -32,6 +32,8 @@ function ParseDatabase() {
       return {
         type: 'sqlite',
         database: process.env.SQLITE_DB || [__dirname + '/../database.sqlite'],
-      };
+        entities: [__dirname + '/models/*.ts'],
+        synchronize: true,
+      } as ConnectionOptions;
   }
 }
