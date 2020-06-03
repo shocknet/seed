@@ -1,8 +1,8 @@
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions, Db } from 'typeorm';
 import * as dotenv from 'dotenv';
 import multer from 'multer';
-import { nanoid } from 'nanoid';
 import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
@@ -57,16 +57,14 @@ function CheckStorage() {
             (process.env.STORAGE_PATH || `/tmp/seed-uploads`) +
             `/${req.token.token}`;
 
-          // Create the directory if it doesn't exist
-          fs.exists(path, exist => {
-            if (!exist) {
-              return fs.mkdir(path, error => {
-                cb(null, path);
-              });
-            }
-          });
+          if (!fs.existsSync(path)) {
+            fs.mkdirSync(path);
+          }
 
           cb(null, path);
+        },
+        filename: (req, file, cb) => {
+          cb(null, file.originalname);
         },
       });
   }
