@@ -7,12 +7,14 @@ import path from 'path';
 dotenv.config();
 
 export type Config = {
+  trackers: String[][];
   port: number;
   db: ConnectionOptions;
   storage: multer.StorageEngine;
 };
 
 export default {
+  trackers: ParseTrackers(),
   port: process.env.PORT || 3000,
   db: ParseDatabase(),
   storage: CheckStorage(),
@@ -58,7 +60,7 @@ function CheckStorage() {
             `/${req.token.token}`;
 
           if (!fs.existsSync(path)) {
-            fs.mkdirSync(path);
+            fs.mkdirSync(path, { recursive: true });
           }
 
           cb(null, path);
@@ -67,5 +69,15 @@ function CheckStorage() {
           cb(null, file.originalname);
         },
       });
+  }
+}
+
+function ParseTrackers() {
+  try {
+    return JSON.parse(process.env.TRACKERS);
+  } catch {
+    console.log(
+      "Couldn't parse the custom trackers. Using the default trackers...",
+    );
   }
 }
