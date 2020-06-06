@@ -28,7 +28,7 @@ export default async (req: Request, res: Response) => {
           comment: req.body.comment, // free-form textual comments of the author
           createdBy: process.env.APP_NAME, // name and version of program used to create torrent
           announceList: config.trackers, // custom trackers (array of arrays of strings)
-          urlList: String[process.env.WEBSEED_URL], // web seed url
+          urlList: [process.env.WEBSEED_URL], // web seed url
           info: req.body.info, // add non-standard info dict entries
         },
         async (err, torrent) => {
@@ -58,7 +58,7 @@ export default async (req: Request, res: Response) => {
       );
     });
   } catch (error) {
-    return res.status(403).json(error);
+    return res.status(409).json(error);
   }
 
   // Add the files info to the database
@@ -89,6 +89,7 @@ export default async (req: Request, res: Response) => {
     data: {
       torrent: {
         name: t.name,
+        web_seed: process.env.WEBSEED_URL,
         magnet: parseTorrent.toMagnetURI(t),
       },
     },
