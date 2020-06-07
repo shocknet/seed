@@ -9,6 +9,7 @@ let uploader = multer({
 });
 
 export default async (server: express.Express) => {
-  server.post('/enroll_token', actions.enroll);
-  server.post('/put_file', auth, uploader.array('files'), actions.upload);
+  server.post('/api/enroll_token', actions.enroll);
+  server.post('/api/put_file', auth, uploader.array('files'), actions.upload);
+  server.get('/api/:hash/info', actions.info);
 };
