@@ -4,7 +4,12 @@ import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
 
-dotenv.config();
+dotenv.config({
+  path:
+    process.env.ENVIRONMENT === 'testing'
+      ? __dirname + '/../.env.test'
+      : __dirname + '/../.env',
+});
 
 export type Config = {
   trackers: String[][];

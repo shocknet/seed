@@ -15,6 +15,7 @@ export class Token {
 
   @Column({
     nullable: false,
+    unique: true,
   })
   token: string;
 
