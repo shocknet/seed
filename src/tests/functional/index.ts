@@ -1,18 +1,21 @@
-import ava, { TestInterface } from 'ava';
+import ava from 'ava';
 import { Server } from 'http';
 
 import { bootstrap } from '../../server';
 import config from '../../config';
 
-export const run = ava as TestInterface<{ token: string }>;
+export const run = ava;
 
 let server: Server;
 
 run.before(async t => {
-  let app = await bootstrap();
-  server = app.server.listen(config.port, () => {
-    console.log(`ShockSeed is running on ${config.port}!`);
-  });
+  await bootstrap()
+    .then(app => {
+      server = app.server.listen(config.port, () => {
+        console.log(`ShockSeed is running on ${config.port}!`);
+      });
+    })
+    .catch(err => console.error("Couldn't start the ShockSeed server:\n", err));
 });
 
 run.after(async t => {
