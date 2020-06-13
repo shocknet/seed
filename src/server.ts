@@ -1,6 +1,7 @@
 import express from 'express';
 import { createConnection, Connection } from 'typeorm';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 import registerRoutes from './routes';
 import config from './config';
@@ -21,6 +22,7 @@ export const bootstrap = async () => {
   await app.db.runMigrations();
 
   app.server.use(bodyParser.json());
+  app.server.use(morgan('combined'));
 
   registerRoutes(app.server);
 
