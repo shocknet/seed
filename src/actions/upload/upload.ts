@@ -16,6 +16,12 @@ export default async (req: Request, res: Response) => {
   const TokenRepository = app.db.getRepository(Token);
   const files = req.files as File[];
 
+  if (files.length === 0) {
+    return res
+      .status(422)
+      .json({ error: { message: 'At least one file should get uploaded' } });
+  }
+
   // Create the torrent file by getting first files directory
   // Promise is used here to wait for ".torrent" file creation before adding
   // files to the database.
@@ -58,6 +64,8 @@ export default async (req: Request, res: Response) => {
       );
     });
   } catch (error) {
+    console.log(error);
+
     return res.status(409).json(error);
   }
 
@@ -90,6 +98,7 @@ export default async (req: Request, res: Response) => {
       torrent: {
         name: t.name,
         web_seed: process.env.WEBSEED_URL,
+        hash: t.infoHash,
         magnet: parseTorrent.toMagnetURI(t),
       },
     },
