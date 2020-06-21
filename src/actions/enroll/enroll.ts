@@ -14,7 +14,7 @@ export default async (req: Request, res: Response) => {
       token: req.body.wallet_token,
     }),
   ).catch(() => {
-    return res.status(403).end();
+    return res.status(500).end();
   });
 
   return res.status(200).end();
