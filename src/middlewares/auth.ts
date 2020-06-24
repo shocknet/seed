@@ -3,6 +3,14 @@ import { app } from '../server';
 import { Token } from '../models/Token';
 
 export default async (req: Request, res: Response, next) => {
+  if (!req.headers.authorization) {
+    return res.status(403).json({
+      error: {
+        message: 'A token must be provided',
+      },
+    });
+  }
+
   const TokenRepository = app.db.getRepository(Token);
 
   const token = await TokenRepository.findOne({
