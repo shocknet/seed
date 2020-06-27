@@ -1,28 +1,28 @@
-# seed
+# Shock Seed
 
 ---
 
-Simple webtorrent seed service using TypeScript and Express.
+Simple webtorrent seed service.
 
 ## Installation
 
 ---
 
-1. Clone the repo using the command below:
+1. Clone and install:
 
 ```bash
 $ git clone git@github.com:shocknet/seed.git
+$ cd seed
+$ mv env.example .env
+$ yarn install
 ```
-
-2. Go to the cloned repository's directory and install the dependencies using [Yarn](https://yarnpkg.com):
+2. Required configuration variables are specified in the example file.
 
 ```bash
-$ yarn
+$ nano .env
 ```
 
-3. Make a copy of the `.env.example` file and name it `.env`. Required configuration variables are specefied with comment inside the example file.
-
-4. Now that configuration and dependencies are ready, you can run the server by using the `start` script:
+3. Run the server by using the `start` script:
 
 ```bash
 $ yarn start
@@ -43,7 +43,7 @@ $ docker build -t shocknet/seed:v0.0.1 .
 1. **WebTorrent Trackers:**  
    The `TRACKERS` environment variable can be used to specify custom web torrent trackers for the generated `.torrent` files.  
     **Format:** An array of arrays of strings. More information available at [bep12](http://www.bittorrent.org/beps/bep_0012.html)  
-    **Default Value:** `[['udp://tracker.leechers-paradise.org:6969'], ['udp://tracker.coppersurfer.tk:6969'], ['udp://tracker.opentrackr.org:1337'], ['udp://explodie.org:6969'], ['udp://tracker.empire-js.us:1337'], ['wss://tracker.btorrent.xyz'], ['wss://tracker.openwebtorrent.com']]`
+    **Default Value:** see `bittorrent-tracker`
 
 2. **WebSeed URLs:**  
    The `WEBSEED_URL` environment variable can be used to specefiy an array of URIs for `.torrent` files' webseed.  
