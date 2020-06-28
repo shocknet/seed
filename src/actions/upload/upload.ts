@@ -34,7 +34,12 @@ export default async (req: Request, res: Response) => {
           comment: req.body.comment, // free-form textual comments of the author
           createdBy: process.env.APP_NAME, // name and version of program used to create torrent
           announceList: config.trackers, // custom trackers (array of arrays of strings)
-          urlList: [process.env.WEBSEED_URL], // web seed url
+          urlList:
+            files.length === 1
+              ? files.map((file: File) => {
+                  return `${process.env.WEBSEED_URL}/${req.token.token}/${file.filename}`;
+                })
+              : [process.env.WEBSEED_URL],
           info: req.body.info, // add non-standard info dict entries
         },
         async (err, torrent) => {
@@ -59,6 +64,8 @@ export default async (req: Request, res: Response) => {
             );
           }
 
+          // Append the .torrent file URI to the magnet
+          t.xs = `${process.env.WEBSEED_URL}/${req.token.token}/${req.token.token}.torrent`;
           resolve(t);
         },
       );
