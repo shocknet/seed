@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "ava": "^3.8.2",
+    "ava": "^3.12.1",
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
     "prettier": "1.18.2"
