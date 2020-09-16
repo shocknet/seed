@@ -13,7 +13,7 @@
   "dependencies": {
     "@types/express": "^4.17.7",
     "@types/multer": "^1.4.3",
-    "@types/node": "^12.7.7",
+    "@types/node": "^14.10.2",
     "@types/parse-torrent": "^5.8.3",
     "body-parser": "^1.19.0",
     "create-torrent": "^4.4.2",
