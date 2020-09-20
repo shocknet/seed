@@ -12,4 +12,7 @@ export default async (server: express.Express) => {
   server.post('/api/enroll_token', actions.enroll);
   server.post('/api/put_file', auth, uploader.array('files'), actions.upload);
   server.get('/api/:hash/info', actions.info);
+  server.get('/api/healthz', (req, res) => {
+    res.send().status(200);
+  });
 };
