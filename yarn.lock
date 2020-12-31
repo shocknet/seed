@@ -141,15 +141,10 @@
   dependencies:
     "@types/express" "*"
 
-"@types/node@*":
-  version "14.0.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.9.tgz#43896ab87fc82bda1dfd600cdf44a0c8a64e11d2"
-  integrity sha512-0sCTiXKXELOBxvZLN4krQ0FPOAA7ij+6WwvD0k/PHd9/KAkr4dXel5J9fh6F4x1FwAQILqAWkmpeuS6mjf1iKA==
-
-"@types/node@^12.7.7":
-  version "12.12.43"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.43.tgz#b60ce047822e526e7a9252e50844eee79d5386ff"
-  integrity sha512-KUyZdkGCnVPuXfsKmDUu2XLui65LZIJ2s0M57noy5e+ixUT2oK33ep7zlvgzI8LElcWqbf8AR+o/3GqAPac2zA==
+"@types/node@*", "@types/node@^14.14.17":
+  version "14.14.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.17.tgz#29fab92f3986c0e379968ad3c2043683d8020dbb"
+  integrity sha512-G0lD1/7qD60TJ/mZmhog76k7NcpLWkPVGgzkRy3CTlnFu4LUQh5v2Wa661z6vnXmD8EQrnALUyf0VRtrACYztw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
