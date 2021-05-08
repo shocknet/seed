@@ -475,7 +475,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bencode@^2.0.0:
+bencode@^2.0.0, bencode@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/bencode/-/bencode-2.0.1.tgz#667a6a31c5e038d558608333da6b7c94e836c85b"
   integrity sha512-2uhEl8FdjSBUyb69qDTgOEeeqDTa+n3yMQzLW0cOzNf1Ow5bwcg3idf+qsWisIKRH8Bk8oC7UXL8irRcPA8ZEQ==
@@ -492,10 +492,10 @@ blob-to-buffer@^1.2.6:
   resolved "https://registry.yarnpkg.com/blob-to-buffer/-/blob-to-buffer-1.2.8.tgz#78eeeb332f1280ed0ca6fb2b60693a8c6d36903a"
   integrity sha512-re0AIxakF504MgeMtIyJkVcZ8T5aUxtp/QmTMlmjyb3P44E1BEv5x3LATBGApWAJATyXHtkXRD+gWTmeyYLiQA==
 
-block-stream2@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/block-stream2/-/block-stream2-2.0.0.tgz#680b9d357ca8b9d5637f4ec8a41fb5968029108f"
-  integrity sha512-1oI+RHHUEo64xomy1ozLgVJetFlHkIfQfJzTBQrj6xWnEMEPooeo2fZoqFjp0yzfHMBrgxwgh70tKp6T17+i3g==
+block-stream2@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/block-stream2/-/block-stream2-2.1.0.tgz#ac0c5ef4298b3857796e05be8ebed72196fa054b"
+  integrity sha512-suhjmLI57Ewpmq00qaygS8UgEq2ly2PCItenIyhMqVjo4t4pGzqMvfgJuX8iWTeSDdfSSqS6j38fL4ToNL7Pfg==
   dependencies:
     readable-stream "^3.4.0"
 
@@ -899,23 +899,24 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-create-torrent@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/create-torrent/-/create-torrent-4.4.2.tgz#2efbd4f3b76ee8c1c4f539c06ceb6382d113de74"
-  integrity sha512-FRxgYty6AF00xrYKMtpQ14ZJlst+i7mmUhcN4do7TTjktEntqAzfriaOIV6xk27t9GLTtraFnaTxsGgnyFA2eA==
+create-torrent@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/create-torrent/-/create-torrent-4.7.0.tgz#ba5d52d41e7621d0d61c895c8026d3fb22aa4333"
+  integrity sha512-Pb3XjZNKdCs0Nk46yFKb82y+a3xRQeMvGi1AlJfIV40y/iwkgBqzS5EfqdnakEOvh2jzTOx3v8QxZpkz4hPzyw==
   dependencies:
-    bencode "^2.0.0"
-    block-stream2 "^2.0.0"
+    bencode "^2.0.1"
+    block-stream2 "^2.1.0"
     filestream "^5.0.0"
     is-file "^1.0.0"
     junk "^3.1.0"
-    minimist "^1.1.0"
-    multistream "^4.0.0"
-    once "^1.3.0"
+    minimist "^1.2.5"
+    multistream "^4.0.1"
+    once "^1.4.0"
     piece-length "^2.0.1"
-    readable-stream "^3.0.2"
-    run-parallel "^1.0.0"
-    simple-sha1 "^3.0.0"
+    queue-microtask "^1.2.2"
+    readable-stream "^3.6.0"
+    run-parallel "^1.1.10"
+    simple-sha1 "^3.0.1"
 
 crypto-random-string@^2.0.0:
   version "2.0.0"
@@ -2116,7 +2117,7 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.1.0, minimist@^1.2.0, minimist@^1.2.5:
+minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -2188,12 +2189,13 @@ multer@^1.4.2:
     type-is "^1.6.4"
     xtend "^4.0.0"
 
-multistream@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/multistream/-/multistream-4.0.0.tgz#c771b6d17d169138b6abcb15f0061170e3c09cea"
-  integrity sha512-t0C8MAtH/d3Y+5nooEtUMWli92lVw9Jhx4uOhRl5GAwS5vc+YTmp/VXNJNsCBAMeEyK/6zhbk6x9JE3AiCvo4g==
+multistream@^4.0.1:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/multistream/-/multistream-4.1.0.tgz#7bf00dfd119556fbc153cff3de4c6d477909f5a8"
+  integrity sha512-J1XDiAmmNpRCBfIWJv+n0ymC4ABcf/Pl+5YvC5B/D2f/2+8PtHvCNxMPKiQcZyi922Hq69J2YOpb1pTywfifyw==
   dependencies:
-    readable-stream "^3.4.0"
+    once "^1.4.0"
+    readable-stream "^3.6.0"
 
 mute-stream@0.0.8:
   version "0.0.8"
@@ -2734,10 +2736,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-queue-microtask@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.1.2.tgz#139bf8186db0c545017ec66c2664ac646d5c571e"
-  integrity sha512-F9wwNePtXrzZenAB3ax0Y8TSKGvuB7Qw16J30hspEUTbfUM+H827XyN3rlpwhVmtm5wuZtbKIHjOnwDn7MUxWQ==
+queue-microtask@^1.2.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
+  integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
 range-parser@~1.2.1:
   version "1.2.1"
@@ -2797,7 +2799,7 @@ readable-stream@^2.0.6, readable-stream@^2.2.2:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-readable-stream@^3.0.2, readable-stream@^3.4.0:
+readable-stream@^3.4.0, readable-stream@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
   integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
@@ -2921,12 +2923,14 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-run-parallel@^1.0.0, run-parallel@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
-  integrity sha512-DEqnSRTDw/Tc3FXf49zedI638Z9onwUotBMiUFKmrO2sdFKIbXamXGQ3Axd4qgphxKB4kw/qP1w5kTxnfU1B9Q==
+run-parallel@^1.1.10, run-parallel@^1.1.9:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.2.0.tgz#66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
+  integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
+  dependencies:
+    queue-microtask "^1.2.2"
 
-rusha@^0.8.1:
+rusha@^0.8.13:
   version "0.8.13"
   resolved "https://registry.yarnpkg.com/rusha/-/rusha-0.8.13.tgz#9a084e7b860b17bff3015b92c67a6a336191513a"
   integrity sha1-mghOe4YLF7/zAVuSxnpqM2GRUTo=
@@ -3049,13 +3053,13 @@ simple-get@^3.0.1:
     once "^1.3.1"
     simple-concat "^1.0.0"
 
-simple-sha1@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/simple-sha1/-/simple-sha1-3.0.1.tgz#b34c3c978d74ac4baf99b6555c1e6736e0d6e700"
-  integrity sha512-q7ehqWfHc1VhOm7sW099YDZ4I0yYX7rqyhqqhHV1IYeUTjPOhHyD3mXvv8k2P+rO7+7c8R4/D+8ffzC9BE7Cqg==
+simple-sha1@^3.0.0, simple-sha1@^3.0.1:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/simple-sha1/-/simple-sha1-3.1.0.tgz#40cac8436dfaf9924332fc46a5c7bca45f656131"
+  integrity sha512-ArTptMRC1v08H8ihPD6l0wesKvMfF9e8XL5rIHPanI7kGOsSsbY514MwVu6X1PITHCTB2F08zB7cyEbfc4wQjg==
   dependencies:
-    queue-microtask "^1.1.2"
-    rusha "^0.8.1"
+    queue-microtask "^1.2.2"
+    rusha "^0.8.13"
 
 slash@^3.0.0:
   version "3.0.0"
