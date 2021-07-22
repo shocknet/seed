@@ -11,6 +11,9 @@ Table of Content:
 - [Installation](#installation)
   - [Docker Container](#docker-container)
 - [Configuration](#configuration)
+- - [Configure Web Server](#configure-web-server)
+- - - [Caddy One-Liner](#Caddy-One-Liner)
+- - - [Full Caddy Config](#full-caddy-config)
 - [Tests](#tests)
   - [Tests Configuration](#tests-configuration)
   - [Run Tests](#run-tests)
@@ -67,7 +70,9 @@ $ docker build -t shocknet/seed:v0.0.1 .
 
 2. **WebSeed URLs:**  
    The `WEBSEED_URL` environment variable can be used to specefiy an array of URIs for `.torrent` files' webseed.  
-   **Format:** An array of strings. More information available at [bep19](http://www.bittorrent.org/beps/bep_0019.html)
+   Check the [Full Caddy Config](#full-caddy-config) section to learn more about how to configure a file server to use as WebSeed.   
+   **Format:** An array of strings. More information available at [bep19](http://www.bittorrent.org/beps/bep_0019.html)    
+   **Example:** "https://example.com"
 
 3. **Database:**  
    This projects supports both `sqlite` and `postgres` databases. Database configuration fields are available in `.env.example` file.  
@@ -78,6 +83,47 @@ $ docker build -t shocknet/seed:v0.0.1 .
    **Default:**  
    `STORAGE_TYPE` = `local`  
    `STORAGE_PATH` = `/tmp/seed-uploads`
+
+### Configure Web Server
+ShockSeed provides both torrent file and streaming options and you can either configure a simple web server to serve the torrent API and files, or also configure the web server to serve streaming API and outputs.
+
+#### Caddy One-Liner
+This One-Liner starts Caddy with a Reverse-Proxy to serve the ShockSeed API and also a file server for torrents.
+
+**Important:** Please remember that this method requires domain's public A/AAAA DNS records pointed at your machine. We recommend running Caddy using a Caddyfile for more control over the service.
+
+```
+caddy reverse-proxy --from example.com --to localhost:3000 file-server --domain example.com
+```
+
+#### Full Caddy Config
+First store this configuration in a file like `/etc/caddy/Caddyfile` and then pass the config to Caddy according to your installation method.   
+This configuration setups both streaming and torrent APIs but the one-liner is only for torrents.
+
+```
+example.com {
+  root * /usr/share/caddy
+
+  handle /rtmp/* {
+    uri strip_prefix /rtmp
+    reverse_proxy localhost:8000
+  }
+
+  handle /api/* {
+    reverse_proxy localhost:3000
+  }
+
+  handle {
+    file_server browse
+  }
+
+  log {
+    output file /var/log/caddy/access.log
+  }
+}
+```
+
+Note: The third `handle` block in this Caddyfile is responsible for serving `.torrent` files aka WebSeed URIs.
 
 ## Tests
 
