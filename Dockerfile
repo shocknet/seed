@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
@@ -7,7 +7,7 @@ ENV PORT=3000
 
 # Install deps
 RUN npm i -g ts-node
-COPY package.json yarn.lock ./
+COPY package.json ./
 RUN apk --no-cache add --virtual native-deps \
   g++ gcc libgcc libstdc++ linux-headers make
 RUN yarn
