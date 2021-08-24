@@ -1,11 +1,19 @@
-import { bootstrap } from "./server";
-import config from "./config";
+import { bootstrap } from './server';
+import config from './config';
 
 bootstrap()
-  .then((app) => {
+  .then(app => {
     app.server.listen(config.port, () => {
       console.log(`ShockSeed is running on ${config.port}!`);
-      app.nms.run();
     });
+
+    app.wssServer.listen(config.port + 5, () => {
+      console.log(
+        `ShockSeed Stream Websocket (Standard Websocket) is running on ${config.port +
+          5}!`,
+      );
+    });
+
+    app.nms.run();
   })
-  .catch((err) => console.error("Couldn't start the ShockSeed server:\n", err));
+  .catch(err => console.error("Couldn't start the ShockSeed server:\n", err));
