@@ -15,6 +15,9 @@ export type Config = {
   trackers: String[][];
   port: number;
   db: ConnectionOptions;
+  secret: string;
+  rtmp: string;
+  rtmpAPI: string;
   storage: multer.StorageEngine;
 };
 
@@ -23,6 +26,9 @@ export default {
   port: process.env.PORT || 3000,
   db: ParseDatabase(),
   storage: CheckStorage(),
+  secret: process.env.SECRET || 'unsafe_secret',
+  rtmp: process.env.RTMP_SERVER || 'rtmp://127.0.0.1:1935',
+  rtmpAPI: process.env.RTMP_API || 'http://localhost:8000/admin',
 } as Config;
 
 // ParseDatabase generates a database connection using environment variables,

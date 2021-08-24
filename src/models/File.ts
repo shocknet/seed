@@ -53,6 +53,11 @@ export class File {
   })
   hash: string;
 
+  @Column({
+    nullable: true,
+  })
+  magnet: string;
+
   @ManyToOne(type => Token, token => token.files)
   token: Token;
 

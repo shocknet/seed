@@ -2,7 +2,10 @@ import express from 'express';
 import { createConnection, Connection } from 'typeorm';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import NodeMediaServer from 'node-media-server'; 
+import NodeMediaServer from 'node-media-server';
+import setupWebSocket from './websockets';
+import { createServer, Server as HTTPServer } from 'http';
+import ws from 'ws';
 
 import registerRoutes from './routes';
 import config from './config';
@@ -12,10 +15,22 @@ export const app: {
   db: Connection;
   server: express.Express;
   nms: NodeMediaServer;
+  rtmpSessions: {
+    [key: string]: any;
+  };
+  viewers: {
+    [key: string]: number;
+  };
+  wssServer: HTTPServer;
+  wss: ws.Server;
 } = {
   db: null,
   server: null,
-  nms: null
+  nms: null,
+  rtmpSessions: {},
+  viewers: {},
+  wssServer: null,
+  wss: null,
 };
 
 export const bootstrap = async () => {
@@ -29,6 +44,11 @@ export const bootstrap = async () => {
   app.server.use(morgan('combined'));
 
   registerRoutes(app.server);
+
+  // Setup simple Websockets (non-socketio)
+  app.wssServer = createServer();
+  app.wss = new ws.Server({ server: app.wssServer });
+  setupWebSocket(app.wss);
 
   app.nms = new NodeMediaServer({
     rtmp: {
@@ -59,7 +79,7 @@ export const bootstrap = async () => {
     },
   });
 
-  RTMPEventsListen(app.nms)
+  RTMPEventsListen(app.nms);
 
   return app;
 };
