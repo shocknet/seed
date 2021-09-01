@@ -104,9 +104,20 @@ This configuration setups both streaming and torrent APIs but the one-liner is o
 example.com {
   root * /usr/share/caddy
 
-  handle /rtmp/* {
-    uri strip_prefix /rtmp
+  header {
+    Access-Control-Allow-Origin "*"
+    Access-Control-Allow-Methods "POST, GET, OPTIONS, PUT, DELETE"
+    Access-Control-Allow-Headers "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Range, User-Agent"
+  }
+
+  handle /rtmpapi/* {
+    uri strip_prefix /rtmpapi
     reverse_proxy localhost:8000
+  }
+
+  handle /websocket/* {
+    uri strip_prefix /websocket
+    reverse_proxy localhost:3005
   }
 
   handle /api/* {
