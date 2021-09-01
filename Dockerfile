@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-buster-slim
 
 WORKDIR /usr/src/app
 
@@ -8,12 +8,10 @@ ENV PORT=3000
 # Install deps
 RUN npm i -g ts-node
 COPY package.json ./
-RUN apk --no-cache add --virtual native-deps \
-  g++ gcc libgcc libstdc++ linux-headers make
-RUN yarn
+RUN npm i
 
 COPY . .
 
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD [ "npm", "start" ]
