@@ -134,7 +134,8 @@ example.com {
 }
 ```
 
-Note: The third `handle` block in this Caddyfile is responsible for serving `.torrent` files aka WebSeed URIs.
+Note: The last `handle` block in this Caddyfile is responsible for serving `.torrent` files aka WebSeed URIs.
+Also if you want streaming enabled, make sure you've set the `/websocket/*` and `/rtmpapi/*` blocks and their prefix trimmer.
 
 ## Tests
 
