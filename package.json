@@ -17,7 +17,7 @@
     "@types/parse-torrent": "^5.8.3",
     "body-parser": "^1.19.0",
     "create-torrent": "^4.4.2",
-    "dotenv": "^9.0.0",
+    "dotenv": "^14.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
