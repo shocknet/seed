@@ -135,5 +135,7 @@ export default async (req: Request, res: Response) => {
 
   return res.json({
     magnet,
+    filename: torrentFile.filename,
+    web_seed: process.env.WEBSEED_URL
   });
 };
